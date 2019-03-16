@@ -19,6 +19,7 @@ let loopB;
 let loop = false;
 let randColB;
 let randCol = false;
+let timeP;
 
 
 
@@ -28,15 +29,16 @@ function setup() {
   cnv.mousePressed(mousePrsd);
   frameRate(60);
 
-  p = createP("Click on the canvas to sort with TODO Sort");
+  p = createP("Click on the canvas to sort with TODO SORT");
+  timeP = createP("Real time of sorting (in milliseconds): ");
   p2 = createP("Length of array: " + LENGTH);
   slider = createSlider(10, width, 80);
-  slider.position(8, height + 60 + p2.height + p.height);
-  btn = createButton("Reset");
-  btn.position(slider.x + slider.width + 10, slider.y);
-  btn.mousePressed(btnPressed);
+  slider.position(8, p2.y + p2.height + 60);
   col = createInput('#ffffff', 'color');
-  col.position(slider.x, btn.y + btn.height + 20);
+  col.position(slider.x + slider.width + 10, slider.y);
+  btn = createButton("Reset");
+  btn.position(col.x + col.width + 10, col.y);
+  btn.mousePressed(btnPressed);
   loopB = createButton("Loop: OFF");
   loopB.position(btn.x + btn.width + 10, btn.y);
   loopB.mousePressed(loopToggle);
@@ -86,7 +88,15 @@ function draw() {
 
 function mousePrsd() {
   if (!rendezve) {
-    //---TODO: Sorting function--------------------------------------------------------------------------------------------------------------------
+    let timeBefore = performance.now();
+
+    //TODO Sorting Algorithm------------------------------------------------------------------------------------
+
+    let timeAfter = performance.now();
+
+    let diff = timeAfter - timeBefore;
+    timeP.html("Real time of sorting (in milliseconds): " + diff);
+
     rendezve = true;
   }
 }
@@ -146,9 +156,7 @@ function tarol(b, j) {
   actionsJ.push(j);
 }
 
-//TODO: Sorting Algorithm------------------------------------------------------------------------------------------------------------------------
-
-//TODO: Sorting Algorithm------------------------------------------------------------------------------------------------------------------------
+//TODO Sorting Algorithm---------------------------------------------------------------------------------------
 
 function nextStep() {
   let bal = actionsB.shift();
